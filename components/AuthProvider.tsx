@@ -1,6 +1,7 @@
 "use client";
 
 import { SessionProvider } from "next-auth/react";
+import { ReactNode } from "react";
 import AutoLogoutWrapper from "@/components/auth/AutoLogoutWrapper";
 import { useSilentRefresh } from "@/components/auth/useSilentRefresh";
 
@@ -9,7 +10,7 @@ function AuthEffects() {
   return null;
 }
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export default function AuthProvider({ children }: { children: ReactNode }) {
   return (
     <SessionProvider>
       <AuthEffects />
