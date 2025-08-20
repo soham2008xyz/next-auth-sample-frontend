@@ -1,17 +1,12 @@
 "use client";
 
-import { useSession, signOut } from "next-auth/react";
+import LogoutButton from "@/components/LogoutButton";
 
 export default function ScholarDashboard() {
-  const { data: session } = useSession();
-
   return (
-    <div>
-      <h1>Scholar Dashboard</h1>
-      <p>Welcome {session?.user?.email}</p>
-      <button onClick={() => signOut({ callbackUrl: "/scholar/login" })}>
-        Logout
-      </button>
+    <div className="p-6">
+      <h1 className="text-xl font-semibold">Scholar Dashboard</h1>
+      <LogoutButton userType="scholar" />
     </div>
   );
 }

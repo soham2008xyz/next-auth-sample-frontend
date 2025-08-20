@@ -1,17 +1,12 @@
 "use client";
 
-import { useSession, signOut } from "next-auth/react";
+import LogoutButton from "@/components/LogoutButton";
 
 export default function AdminDashboard() {
-  const { data: session } = useSession();
-
   return (
-    <div>
-      <h1>Admin Dashboard</h1>
-      <p>Welcome {session?.user?.email}</p>
-      <button onClick={() => signOut({ callbackUrl: "/admin/login" })}>
-        Logout
-      </button>
+    <div className="p-6">
+      <h1 className="text-xl font-semibold">Admin Dashboard</h1>
+      <LogoutButton userType="admin" />
     </div>
   );
 }

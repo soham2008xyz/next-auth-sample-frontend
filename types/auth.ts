@@ -9,3 +9,9 @@ export interface BackendUser {
   refreshToken: string;
   expiresAt: number;
 }
+
+export interface RefreshResponse {
+  accessToken: string;
+  refreshToken: string;
+  expiresAt: number;
+}

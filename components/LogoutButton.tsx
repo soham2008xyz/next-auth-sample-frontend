@@ -1,38 +1,18 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
-import { api } from "@/lib/api";
+import { signOut } from "next-auth/react";
 
-export default function LogoutButton() {
-    const { data: session } = useSession();
-    const role = session?.user?.role ?? "scholar";
-
-    const onLogout = async () => {
-        try {
-            if (session?.refreshToken && session?.accessToken) {
-                await api.post(
-                    `/${role}/logout`,
-                    { refresh_token: session.refreshToken },
-                    {
-                        headers: {
-                            Authorization: `Bearer ${session.accessToken}`,
-                        },
-                    }
-                );
-            }
-        } catch (e) {
-            console.error("Logout error (ignored):", e);
-        } finally {
-            await signOut({ callbackUrl: `/${role}/login` });
-        }
-    };
-
-    return (
-        <button
-            onClick={onLogout}
-            className="px-3 py-2 rounded-md bg-gray-200 hover:bg-gray-300"
-        >
-            Logout
-        </button>
-    );
+export default function LogoutButton({
+  userType,
+}: {
+  userType: "scholar" | "admin" | "supervisor";
+}) {
+  return (
+    <button
+      onClick={() => signOut({ callbackUrl: `/${userType}/login` })}
+      className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+    >
+      Logout
+    </button>
+  );
 }
